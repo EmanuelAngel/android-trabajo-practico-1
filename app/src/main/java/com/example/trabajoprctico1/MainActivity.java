@@ -1,6 +1,9 @@
 package com.example.trabajoprctico1;
 
+import android.Manifest;
 import android.content.IntentFilter;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
@@ -25,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
+        requestCallPhonePermissions();
+
         airplaneModeAndCallReceiver = new AirplaneModeAndCallReceiver();
     }
 
@@ -45,5 +50,13 @@ public class MainActivity extends AppCompatActivity {
         super.onStop();
 
         unregisterReceiver(airplaneModeAndCallReceiver);
+    }
+
+    private void requestCallPhonePermissions() {
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M
+                && checkSelfPermission(Manifest.permission.CALL_PHONE)
+                != PackageManager.PERMISSION_GRANTED){
+            requestPermissions(new String[] { Manifest.permission.CALL_PHONE },1000);
+        }
     }
 }
