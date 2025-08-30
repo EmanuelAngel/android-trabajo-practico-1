@@ -1,6 +1,7 @@
 package com.example.trabajoprctico1;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.os.Build;
@@ -39,9 +40,7 @@ public class MainActivity extends AppCompatActivity {
 
         registerReceiver(
                 airplaneModeAndCallReceiver,
-                new IntentFilter(
-                "android.intent.action.AIRPLANE_MODE"
-                )
+                new IntentFilter(Intent.ACTION_AIRPLANE_MODE_CHANGED)
         );
     }
 
